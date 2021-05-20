@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   devServer: {
     stats: 'errors-warnings'
   },

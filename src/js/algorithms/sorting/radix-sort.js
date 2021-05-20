@@ -1,7 +1,9 @@
 import { findMaxValue, findMinValue } from '../search/min-max-search';
 
-const getBucketIndex = (value, minValue, significantDigit, radixBase) =>
-  Math.floor(((value - minValue) / significantDigit) % radixBase);
+const getBucketIndex = (value, minValue, significantDigit, radixBase) => {
+  const num = Math.floor(((value - minValue) / significantDigit) % radixBase);
+  return num
+}
 
 const countingSortForRadix = (array, radixBase, significantDigit, minValue) => {
   let bucketsIndex;
@@ -17,9 +19,10 @@ const countingSortForRadix = (array, radixBase, significantDigit, minValue) => {
   for (let i = 1; i < radixBase; i++) {
     buckets[i] += buckets[i - 1];
   }
-  for (let i = array.length - 1; i >= 0; i--) {
-    bucketsIndex = getBucketIndex(array[i], minValue, significantDigit, radixBase);
-    aux[--buckets[bucketsIndex]] = array[i];
+  for (let j = array.length - 1; j >= 0; j--) {
+    bucketsIndex = getBucketIndex(array[j], minValue, significantDigit, radixBase);
+    buckets[bucketsIndex]--
+    aux[buckets[bucketsIndex]] = array[j];
   }
   for (let i = 0; i < array.length; i++) {
     array[i] = aux[i];
