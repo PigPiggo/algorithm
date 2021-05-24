@@ -23,6 +23,7 @@ const countingSortForRadix = (array, radixBase, significantDigit, minValue) => {
     bucketsIndex = getBucketIndex(array[j], minValue, significantDigit, radixBase);
     buckets[bucketsIndex]--
     aux[buckets[bucketsIndex]] = array[j];
+    console.log(123123);
   }
   for (let i = 0; i < array.length; i++) {
     array[i] = aux[i];
@@ -30,6 +31,7 @@ const countingSortForRadix = (array, radixBase, significantDigit, minValue) => {
   return array;
 };
 export function radixSort(array, radixBase = 10) {
+  debugger
   if (array.length < 2) {
     return array;
   }
