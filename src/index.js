@@ -1,7 +1,32 @@
-// import countingSort from './try/countingSort';
-import { radixSort } from './js/index'
+function minCoinChange(coinArr, amount) {
+  let arrCopy = [...coinArr];
+  let cache = [];
+  const split = (amount, arr) => {
+    let arrCopy = [...arr];
+    let res = [];
+    let newRes;
+    while (arrCopy.length && amount > 0) {
+      const num = arrCopy.pop();
+      cache.push(num)
+      amount -= num;
+      newRes = num;
+      if (amount > 0) {
+        const _r = split(amount, arrCopy);
+        if (Array.isArray(_r)) {
+          newRes = _r
+        } else {
+          arrCopy.push(newRes)
+        }
+      }
+      if (amount === 0)
+        newRes = [num];
+    }
+    if (Array.isArray(newRes))
+      return res.concat(newRes);
+    return newRes;
+  };
+  return split(amount, arrCopy)
+}
+debugger
+minCoinChange([1, 5, 10, 25], 36)
 
-// Array.prototype.countingSort = countingSort
-// const arr = [456, 789, 123, 1, 32, 4, 243, 321, 42, 90, 10, 999];
-const arr = [918, 996, 997, 999];
-console.log(radixSort(arr));
