@@ -1,32 +1,36 @@
-function minCoinChange(coinArr, amount) {
-  let arrCopy = [...coinArr];
-  let cache = [];
-  const split = (amount, arr) => {
-    let arrCopy = [...arr];
-    let res = [];
-    let newRes;
-    while (arrCopy.length && amount > 0) {
-      const num = arrCopy.pop();
-      cache.push(num)
-      amount -= num;
-      newRes = num;
-      if (amount > 0) {
-        const _r = split(amount, arrCopy);
-        if (Array.isArray(_r)) {
-          newRes = _r
-        } else {
-          arrCopy.push(newRes)
-        }
+// import { minCoinChange } from './js/algorithms/dynamic-programing/min-coin-change'
+const cache = []
+function minCoinChange(coins, amount) {
+  const makeChange = value => {
+    if (!value)
+      return [];
+    if (cache[value])
+      return cache[value];
+    let min = [];
+    let newMin;
+    let newAmount;
+    for (let v of coins) {
+      if (value === 2) debugger
+      newAmount = value - v;
+      if (newAmount > 0) {
+        newMin = makeChange(newAmount);
       }
-      if (amount === 0)
-        newRes = [num];
+      if (newAmount === 0)
+        newMin = [];
+      if (newAmount < 0) continue;
+      if (!!min.length && newMin.length > min.length - 1) continue;
+      newMin.push(v)
+      min = newMin
     }
-    if (Array.isArray(newRes))
-      return res.concat(newRes);
-    return newRes;
-  };
-  return split(amount, arrCopy)
-}
-debugger
-minCoinChange([1, 5, 10, 25], 36)
+    return (cache[value] = min)
+  }
 
+
+  const aa = makeChange(amount)
+  console.log(cache);
+  console.log(aa);
+
+  return aa
+}
+
+console.log(minCoinChange([1, 2], 4));
