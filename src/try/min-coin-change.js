@@ -1,5 +1,4 @@
-// import { minCoinChange } from './js/algorithms/dynamic-programing/min-coin-change'
-function minCoinChange(coins, amount) {
+export default function minCoinChange(coins, amount) {
   const cache = [];
 
   const makeChange = value => {
@@ -27,5 +26,3 @@ function minCoinChange(coins, amount) {
   }
   return makeChange(amount)
 }
-
-console.log(minCoinChange([1, 5, 15], 36));
