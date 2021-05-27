@@ -9,7 +9,9 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    stats: 'errors-warnings'
+    stats: 'errors-warnings',
+    port: '8000',
+    open: true
   },
   module: {
     rules: [

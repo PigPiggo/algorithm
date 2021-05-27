@@ -37,5 +37,6 @@ export function knapSack(capacity, weights, values, n) {
   }
   // extra algorithm to find the items that are part of the solution
   findValues(n, capacity, kS);
+  console.log(kS);
   return kS[n][capacity];
 }

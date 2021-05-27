@@ -1,31 +1,7 @@
-// import { minCoinChange } from './js/algorithms/dynamic-programing/min-coin-change'
-function minCoinChange(coins, amount) {
-  const cache = [];
+import { knapSack } from './js/algorithms/dynamic-programing/knapsack'
+const values = [3, 4, 5],
+  weights = [2, 3, 4],
+  capacity = 5,
+  n = values.length;
 
-  const makeChange = value => {
-    if (!value)
-      return [];
-    if (cache[value])
-      return cache[value];
-    let min = [];
-    let newMin;
-    let newAmount;
-    for (let v of coins) {
-      newAmount = value - v;
-      if (newAmount > 0) {
-        newMin = [...makeChange(newAmount)];
-      }
-      if (newAmount < 0) continue;
-      if (newAmount === 0)
-        newMin = [];
-      newMin.push(v)
-      if ((!!newMin.length && newMin.length <= min.length - 1) || !min.length) {
-        min = newMin
-      }
-    }
-    return (cache[value] = min)
-  }
-  return makeChange(amount)
-}
-
-console.log(minCoinChange([1, 5, 15], 36));
+console.log(knapSack(capacity, weights, values, n));
